@@ -39,7 +39,6 @@ var goBasicCmd = &cobra.Command{
 }
 
 func init() {
-	log.Debug().Msg("Starting init function")
 	rootCmd.AddCommand(goBasicCmd)
 
 }

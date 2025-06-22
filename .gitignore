@@ -1,0 +1,44 @@
+# Зависимости
+/vendor/
+go.sum
+
+# Исполняемые файлы
+*.exe
+*.dll
+*.so
+*.dylib
+*.rpm
+*.deb
+*.apk
+*.bin
+
+# Компилируемые артефакты
+*.o
+*.a
+
+# Тестовые кэши и отчеты
+*_test
+testdata/
+.test/
+coverage.out
+.coverprofile
+
+# Каталоги IDE (JetBrains, VS Code)
+.idea/
+.vscode/
+
+# Разные файлы и логи
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Операционные системы
+.DS_Store
+Thumbs.db
+
+# Конфиденциальные данные (если не управляются git-crypt и т.п.)
+# .env
+# config.yaml
+# *.pem

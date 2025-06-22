@@ -82,21 +82,19 @@ func parseLogLevel(lvl string) zerolog.Level {
 		return zerolog.WarnLevel
 	case "error":
 		return zerolog.ErrorLevel
-	case "fatal": // Добавлено для полноты zerolog
+	case "fatal":
 		return zerolog.FatalLevel
-	case "panic": // Добавлено для полноты zerolog
+	case "panic":
 		return zerolog.PanicLevel
-	case "disabled": // Добавлено для полноты zerolog
+	case "disabled":
 		return zerolog.Disabled
 	default:
-		// В случае неверного уровня, логируем ошибку и возвращаем info по умолчанию.
-		// Мы используем os.Stderr, потому что на этом этапе log.Logger может быть еще не полностью настроен.
 		fmt.Fprintf(os.Stderr, "Warning: Invalid log level '%s' provided. Using 'info' level. Valid levels are: %s\n", lvl, getValidZerologLevels())
 		return zerolog.InfoLevel
 	}
 }
 
-// configureLogger настраивает глобальный логгер zerolog в зависимости от уровня.
+// configureLogger set global zerolog on setting log level
 func configureLogger(level zerolog.Level) {
 	// set global log level
 	zerolog.SetGlobalLevel(level)

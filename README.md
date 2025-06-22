@@ -32,4 +32,8 @@ Get a complete Kubernetes development environment running in seconds:
 git clone https://github.com/Searge/k8s-controller.git
 cd k8s-controller
 ```
-
+#### - step 1. Init cobra-cli application  [README1.md](README1.md)
+#### - step 2. Add zerolog logging  [README1.md](README2.md)
+#### - step 3. Add --log-level command line parameter [README3.md](README3.md)
+#### - step 4. Add simple fast http server  [README4.md](README4.md)
+#### - step 5. Add github CI [README5.md](README5.md)

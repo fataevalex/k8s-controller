@@ -19,17 +19,11 @@ var logLevel string // global variable to store --log-level
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "k8s-controller",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
+	Short: "k8s-controller is simple kubernetes controller on golang",
+	Long: `
 k8s-controller is a CLI tool to manage Kubernetes resources.
 It allows you to perform various operations on your cluster.`,
-	// PersistentPreRunE: func(cmd *cobra.Command, args []string) {
-	// 	// Можно было бы использовать и здесь, но cobra.OnInitialize более предпочтителен для глобальных настроек логгера
-	// },
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
+
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Info().Msg("k8s-controller root command executed.")
 		// Base logic

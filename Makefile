@@ -3,7 +3,8 @@ VERSION ?= $(shell git describe --tags --always --dirty)
 BUILD_FLAGS = -v -o $(APP) -ldflags "-X=github.com/den-vasyliev/$(APP)/cmd.appVersion=$(VERSION)"
 ENVTEST ?= $(LOCALBIN)/setup-envtest
 ENVTEST_VERSION ?= latest
-LOCALBIN ?= $(shell pwd)/bin
+SHELL := /bin/bash
+LOCALBIN ?= $(shell	pwd)/bin
 
 .PHONY: all build test test-coverage run docker-build clean envtest
 
@@ -28,8 +29,9 @@ lint:
 
 envtest: $(ENVTEST) ## Download setup-envtest locally if necessary.
 $(ENVTEST): $(LOCALBIN)
-	$(call go-install-tool,$(ENVTEST),sigs.k8s.io/controller-runtime/tools/setup-envtest,$(ENVTEST_VERSION))
-
+	@echo "Installing setup-envtest to $(ENVTEST)"
+	@echo "go install sigs.k8s.io/controller-runtime/tools/setup-envtest@$(ENVTEST_VERSION)"
+	@GOBIN=$(LOCALBIN) go install sigs.k8s.io/controller-runtime/tools/setup-envtest@$(ENVTEST_VERSION)
 
 build:
 	CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) go build $(BUILD_FLAGS) main.go

@@ -20,6 +20,7 @@ var listCmd = &cobra.Command{
 	Short: "List Kubernetes deployments in the namespace",
 
 	Run: func(cmd *cobra.Command, args []string) {
+		log.Debug().Msg("k8s-controller list command executed.")
 		InitConfig()
 		log.Debug().Msgf("Using namespace %s", Namespace)
 		log.Debug().Msgf("Using config %s", KubeConfigPath)

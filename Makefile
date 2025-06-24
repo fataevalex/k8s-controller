@@ -12,6 +12,9 @@ build:
 test:
 	go test ./...
 
+test-integration:
+	 go test -v ./cmd -run TestDeploymentIntegration
+
 run:
 	go run main.go
 

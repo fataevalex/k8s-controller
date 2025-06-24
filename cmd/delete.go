@@ -42,7 +42,7 @@ var deleteCmd = &cobra.Command{
 			log.Error().Err(err).Msgf("Failed to delete deployment %s", DeploymentName)
 			os.Exit(1)
 		}
-		fmt.Printf("Deployment '%s' deleted from namespace '%s'\n", DeploymentName, Namespace)
+		fmt.Fprintf(cmd.OutOrStdout(), "Deployment '%s' deleted from namespace '%s'\n", DeploymentName, Namespace)
 	},
 }
 

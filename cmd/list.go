@@ -42,7 +42,7 @@ var listCmd = &cobra.Command{
 		}
 
 		for _, d := range deployments.Items {
-			fmt.Println("-", d.Name)
+			fmt.Fprintln(cmd.OutOrStdout(), "-", d.Name)
 		}
 	},
 }

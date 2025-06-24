@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/rs/zerolog/log"
 	"os"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -40,7 +41,21 @@ var listCmd = &cobra.Command{
 	},
 }
 
+func getDefaultKubeConfigPath() string {
+	if env := os.Getenv("KUBECONFIG"); env != "" {
+		return env
+	}
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return ""
+	}
+	return filepath.Join(home, ".kube", "config")
+}
+
 func getKubeClient(kubeconfigPath string) (*kubernetes.Clientset, error) {
+	if kubeconfigPath == "" {
+		kubeconfigPath = getDefaultKubeConfigPath()
+	}
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfigPath)
 	if err != nil {
 		return nil, err

@@ -25,7 +25,7 @@ k8s-controller is a CLI tool to manage Kubernetes resources.
 It allows you to perform various operations on your cluster.`,
 
 	Run: func(cmd *cobra.Command, args []string) {
-		log.Info().Msg("k8s-controller root command executed.")
+		log.Debug().Msg("k8s-controller root command executed.")
 		// Base logic
 	},
 }
@@ -48,11 +48,13 @@ func init() {
 		&logLevel,   // global loglevel
 		"log-level", // loglevel  param name
 		"info",      // set default log level
-		fmt.Sprintf("Set log level: %s", getValidZerologLevels()), // Динамическое описание
+		fmt.Sprintf("Set log level: %s", getValidZerologLevels()),
 	)
 
-	// Пример локального флага, который вы уже имели
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.PersistentFlags().StringVarP(&Namespace, "namespace", "n", Namespace, "Kubernetes namespace")
+	rootCmd.PersistentFlags().StringVar(&KubeConfigPath, "kubeconfig", "", "Path to kubeconfig file")
+	rootCmd.PersistentFlags().BoolVarP(&AllNamespaces, "all-namespaces", "A", false, "If present, list across all namespaces")
 }
 
 // initLogger will be executed by Cobra after parsing command line params.

@@ -39,3 +39,4 @@ cd k8s-controller
 - [x] [Pflag, implementing POSIX/GNU-style --flags](docs/03-cobra-cli-pflag/README.md)
 - [x] [Fast HTTP](docs/04-fast-http-server/README.md)
 - [x] [Makefile, CI](docs/05-github-ci/README.md)
+- [x] [List Kubernetes Deployments with client-go](docs/06-list-deployments/README.md)

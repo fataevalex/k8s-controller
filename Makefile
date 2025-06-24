@@ -38,9 +38,11 @@ test: envtest
 	go install gotest.tools/gotestsum@latest
 	KUBEBUILDER_ASSETS="$(shell $(ENVTEST) use --bin-dir $(LOCALBIN) -p path)" gotestsum --junitfile report.xml --format testname ./... ${TEST_ARGS}
 
-
-test:
-	go test ./...
+test-coverage: envtest
+	go install github.com/boumenot/gocover-cobertura@latest
+	KUBEBUILDER_ASSETS="$(shell $(ENVTEST) use --bin-dir $(LOCALBIN) -p path)" go test -coverprofile=coverage.out -covermode=count ./...
+	go tool cover -func=coverage.out
+	gocover-cobertura < coverage.out > coverage.xml
 
 test-integration:
 	 go test -v ./cmd -run TestDeploymentIntegration

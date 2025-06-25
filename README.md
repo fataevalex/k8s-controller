@@ -41,3 +41,4 @@ cd k8s-controller
 - [x] [Makefile, CI](docs/05-github-ci/README.md)
 - [x] [List Kubernetes Deployments with client-go](docs/06-list-deployments/README.md)
 - [x] [Deployment Informer with client-go](docs/07-Deployment-Informer/README.md)
+- [ ] [Deployment Informer with api-handler](docs/08-api-handler/README.md)

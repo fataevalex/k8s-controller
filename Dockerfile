@@ -13,3 +13,4 @@ WORKDIR /
 COPY --from=builder /app/k8s-controller .
 EXPOSE 8080
 ENTRYPOINT ["/k8s-controller"]
+CMD ["server"]

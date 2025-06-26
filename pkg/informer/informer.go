@@ -2,6 +2,7 @@ package informer
 
 import (
 	"context"
+	appsv1 "k8s.io/api/apps/v1"
 	"os"
 	"time"
 
@@ -13,6 +14,8 @@ import (
 	"k8s.io/client-go/tools/cache"
 )
 
+var deploymentInformer cache.SharedIndexInformer
+
 // StartDeploymentInformer starts a shared informer for Deployments in the default namespace.
 func StartDeploymentInformer(ctx context.Context, clientset *kubernetes.Clientset) {
 	factory := informers.NewSharedInformerFactoryWithOptions(
@@ -23,9 +26,9 @@ func StartDeploymentInformer(ctx context.Context, clientset *kubernetes.Clientse
 			options.FieldSelector = fields.Everything().String()
 		}),
 	)
-	informer := factory.Apps().V1().Deployments().Informer()
+	deploymentInformer = factory.Apps().V1().Deployments().Informer()
 
-	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{
+	deploymentInformer.AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
 			log.Info().Msgf("Deployment added: %s", getDeploymentName(obj))
 		},
@@ -54,4 +57,18 @@ func getDeploymentName(obj any) string {
 		return d.GetName()
 	}
 	return "unknown"
+}
+
+// GetDeploymentNames returns a slice of deployment names from the informer's cache.
+func GetDeploymentNames() []string {
+	var names []string
+	if deploymentInformer == nil {
+		return names
+	}
+	for _, obj := range deploymentInformer.GetStore().List() {
+		if d, ok := obj.(*appsv1.Deployment); ok {
+			names = append(names, d.Name)
+		}
+	}
+	return names
 }

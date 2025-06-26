@@ -42,4 +42,5 @@ cd k8s-controller
 - [x] [List Kubernetes Deployments with client-go](docs/06-list-deployments/README.md)
 - [x] [Deployment Informer with client-go](docs/07-Deployment-Informer/README.md)
 - [x] [Deployment Informer with api-handler](docs/08-api-handler/README.md)
-- [ ] [Controller runtime](docs/09-controller-runtime/README.md)
+- [x] [Controller runtime](docs/09-controller-runtime/README.md)
+- [x] [Leader Election and Metrics for Controller Manager](docs/10-leader-election/README.md)

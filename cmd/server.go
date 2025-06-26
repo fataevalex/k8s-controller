@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/fataevalex/k8s-controller/pkg/ctrl"
 	"github.com/fataevalex/k8s-controller/pkg/informer"
+	"github.com/go-logr/zerologr"
 	"github.com/google/uuid"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
@@ -14,6 +15,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"os"
 	ctrlruntime "sigs.k8s.io/controller-runtime"
+	controllerlog "sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 )
 
@@ -35,6 +37,7 @@ var serverCmd = &cobra.Command{
 		go informer.StartDeploymentInformer(ctx, clientset)
 
 		// Start controller-runtime manager and controller
+		controllerlog.SetLogger(zerologr.New(&log.Logger))
 		mgr, err := ctrlruntime.NewManager(ctrlruntime.GetConfigOrDie(), manager.Options{})
 		if err != nil {
 			log.Error().Err(err).Msg("Failed to create controller-runtime manager")

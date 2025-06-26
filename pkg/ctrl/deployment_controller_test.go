@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
+	testutil "github.com/fataevalex/k8s-controller/pkg/testutil"
 	"github.com/stretchr/testify/require"
-	testutil "github.com/yourusername/k8s-controller-tutorial/pkg/testutil"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

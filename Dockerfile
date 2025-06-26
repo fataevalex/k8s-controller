@@ -12,4 +12,4 @@ FROM gcr.io/distroless/static-debian12
 WORKDIR /
 COPY --from=builder /app/k8s-controller .
 EXPOSE 8080
-ENTRYPOINT ["/k8s-controllerl"]
+ENTRYPOINT ["/k8s-controller"]
